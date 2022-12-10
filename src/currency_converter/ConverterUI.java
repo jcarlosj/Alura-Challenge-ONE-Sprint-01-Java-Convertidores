@@ -4,6 +4,7 @@ import javax.swing.*;
 
 public class ConverterUI {
     CurrencyConverter cc = new CurrencyConverter();
+    String cop_value = null;
 
     public void main_menu() {
         // Cuadro de dialogo menú principal
@@ -29,6 +30,30 @@ public class ConverterUI {
             default:
                 throw new IllegalArgumentException( "Unexpected value: " + selectedValue );
         }
+
+        this.continue_app();
+
+    }
+
+    public void continue_app() {
+        Object[] options = { "Si", "No" };
+        int option = JOptionPane.showOptionDialog(
+            null,
+            " ¿Desea continuar?",
+            "Warning",
+            JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
+            null,
+            options,
+            options[ 0 ]
+        );
+
+        if( JOptionPane.OK_OPTION == option )
+            this.main_menu();
+        else
+            JOptionPane.showMessageDialog(
+                null,
+                "Programa terminado"
+            );
     }
 
     public void currency() {
@@ -44,7 +69,7 @@ public class ConverterUI {
                 possibleValues[ 0 ]
         );
 
-        String cop_value = JOptionPane.showInputDialog("Ingrese la cantidad de dinero que deseas convertir");
+        this.cop_value = JOptionPane.showInputDialog("Ingrese la cantidad de dinero que deseas convertir");
 
         switch ( selectedValue ) {
             case "COP a USD": {
