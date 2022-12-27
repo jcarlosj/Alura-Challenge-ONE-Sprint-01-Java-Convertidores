@@ -69,7 +69,16 @@ public class ConverterUI {
                 possibleValues[ 0 ]
         );
 
-        this.cop_value = JOptionPane.showInputDialog("Ingrese la cantidad de dinero que deseas convertir");
+        this.cop_value = JOptionPane.showInputDialog( "Ingrese la cantidad de dinero que deseas convertir" );
+
+        if( ! isNumeric( this.cop_value ) ) {
+            JOptionPane.showMessageDialog(
+                null,
+                "Valor no valido"
+            );
+
+            return;
+        }
 
         switch ( selectedValue ) {
             case "COP a USD": {
@@ -93,5 +102,18 @@ public class ConverterUI {
             default:
                 throw new IllegalArgumentException( "Unexpected value: " + selectedValue );
         }
+    }
+
+    public static boolean isNumeric( String strNum ) {
+        if ( strNum == null )
+            return false;
+
+        try {
+            double d = Integer.parseInt( strNum );
+        } catch ( NumberFormatException nfe ) {
+            return false;
+        }
+
+        return true;
     }
 }
